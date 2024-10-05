@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="apple-touch-icon" href="/image/apple-touch-icon.png" />
+    <link rel="stylesheet" href="./login.css" />
+  </head>
+  <body>
+    <section class="login">
+      <div class="form">
+        <div class="left">
+          <span class="head">
+            <h2>Log in</h2>
+            <p>Log in to buy products</p>
+          </span>
+          <div class="info">
+            <form action="/login/login.php" method="post">
+              <input
+                type="email"
+                placeholder="Email"
+                id="username"
+                name="email"
+                required
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                id="password"
+                name="password"
+                required
+              />
+
+              <button>Log in</button>
+            </form>
+          </div>
+          <span><a href="signup.html">Sign up</a></span>
+        </div>
+        <div class="right">
+          <img src="./logo_1.png" alt="" />
+          <p>Organic products from the hearts of karnali.</p>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

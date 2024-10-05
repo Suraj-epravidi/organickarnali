@@ -1,0 +1,37 @@
+/* Custom Scrollbar Styles */
+.scrollbar-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.scrollbar-content {
+  overflow: scroll;
+  height: 100%;
+  width: 100%;
+}
+
+/* Scrollbar Track */
+.scrollbar-track {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 12px;
+  height: 100%;
+  background: #f1f1f1;
+  border-radius: 6px;
+}
+
+/* Scrollbar Thumb */
+.scrollbar-thumb {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 12px;
+  background: #888;
+  border-radius: 6px;
+}
+
+/* Scrollbar Thumb Hover */
+.scrollbar-thumb:hover {
+  background: #555;
+}

@@ -1,0 +1,126 @@
+/* FONTS */
+
+@font-face {
+  font-family: romia;
+  src: url("./Romla.ttf");
+}
+@font-face {
+  font-family: rena;
+  src: url("./Rena-Regular.ttf");
+}
+
+body {
+  background-image: url("background.png");
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+}
+.form {
+  width: 65%;
+  height: 70vh;
+  background-color: rgba(0, 0, 0, 0.335);
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  top: 15vh;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9%;
+}
+.left {
+  width: 30%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.right {
+  width: 45%;
+  font-family: rena;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  bottom: 3%;
+}
+.right img {
+  width: 80%;
+  position: relative;
+  margin-bottom: 3%;
+}
+
+.form h2 {
+  font-family: romia;
+  font-size: 2em;
+}
+.form p {
+  font-family: rena;
+  font-size: 0.9em;
+  margin: 0;
+}
+.head {
+  line-height: 10px;
+  color: white;
+}
+.info form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.info input {
+  padding: 3%;
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 5px;
+  height: 29px;
+  width: 93.5%;
+  font-size: 1em;
+  color: white;
+}
+::placeholder {
+  color: white;
+  opacity: 0.8;
+  font-size: 1em;
+}
+.info button {
+  padding: 4%;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+  color: black;
+  height: 55px;
+  width: 100%;
+  font-size: 1em;
+}
+.info button:hover {
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+}
+.left a {
+  text-decoration: underline;
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+  font-family: rena;
+}
+.left a:hover {
+  color: blanchedalmond;
+}
+
+.login .form .head {
+  position: relative;
+  top: 7%;
+}
+.verify .form .head {
+  position: relative;
+  top: 13%;
+}
+.verify .form .info {
+  position: relative;
+  bottom: 13%;
+}

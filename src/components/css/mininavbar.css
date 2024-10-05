@@ -1,0 +1,70 @@
+/* Basic reset and layout styles */
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #222;
+  color: white;
+  padding: 10px 0;
+  display: none; /* Hidden by default */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional shadow for visual separation */
+}
+
+nav.active {
+  display: block;
+  transform: translateY(0);
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 16px;
+}
+
+.logo {
+  height: 40px; /* Adjust as needed */
+}
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+}
+
+.nav-icons a {
+  margin: 0 10px;
+}
+
+.nav-icons img {
+  height: 24px; /* Adjust as needed */
+  width: auto;
+}
+
+#nav1 {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-start;
+}
+
+#nav2 {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+}

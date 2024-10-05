@@ -1,0 +1,80 @@
+.testimonies {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.slides {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  gap: 1%;
+  opacity: 1;
+  transition: opacity 0.5s ease; /* Smooth opacity transition */
+}
+
+.Tfade-out {
+  opacity: 0;
+}
+
+.Tfade-in {
+  opacity: 1;
+}
+
+.arrow {
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 1;
+  position: absolute;
+  top: 39%;
+}
+
+.arrow.left {
+  position: absolute;
+  left: -10px;
+  z-index: 999;
+}
+
+.arrow.right {
+  position: absolute;
+  right: -10px;
+  z-index: 999;
+}
+
+.scroll {
+  margin-top: 10px;
+}
+@media (max-width: 700px) {
+  .scroll {
+    margin-top: 20px;
+  }
+}
+.scroll .dot {
+  display: inline-block;
+  width: 0.8vw;
+  height: 0.8vw;
+  background: #ccc;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.scroll .dot.active {
+  background: #333;
+}
+@media (max-width: 700px) {
+  .slides {
+    height: fit-content;
+  }
+  .scroll .dot {
+    display: inline-block;
+    width: 1vw;
+    height: 1vw;
+    background: #ccc;
+    border-radius: 50%;
+    margin: 0 0.6vw;
+    cursor: pointer;
+  }
+}

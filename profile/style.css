@@ -1,0 +1,489 @@
+.my-app {
+  background-color: #fbfbfd;
+  color: #3e3f42;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 14px;
+}
+
+/* My navbar */
+.my-navbar {
+  padding: 1rem 1.875rem;
+  box-shadow: 0 0 1px #eaedf3;
+}
+
+.my-navbar__logo {
+  display: flex;
+  align-items: center;
+  margin-right: 1.875rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.navbar-light .my-navbar__logo {
+  color: #3e3f42;
+}
+
+.my-navbar__logo-icon {
+  margin-right: 0.875rem;
+}
+
+.my-navbar-button {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.my-navbar-button + .my-navbar-button {
+  margin-left: 1rem;
+}
+
+.navbar-nav {
+  padding-left: 0.937rem;
+  border-left: 1px solid #eaedf3;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+  padding-right: 0.937rem;
+  padding-left: 0.937rem;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #6b6c6f;
+}
+
+.navbar-light .navbar-nav .active > .nav-link {
+  color: #1665d8;
+}
+
+/* Content header */
+.my-app__header {
+  padding-top: 1.875rem;
+  padding-bottom: 1.875rem;
+  border-bottom: 1px solid #eee;
+  background-color: #fff;
+}
+
+.my-app__header-inner {
+  display: flex;
+}
+
+.my-app__header-text {
+  flex: 1;
+}
+
+.my-app__header-title {
+  margin: 0 0 0.625rem;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+.my-action-buttons {
+  display: flex;
+}
+
+.my-action-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  background: none;
+  line-height: 1;
+}
+
+.my-action-button:hover,
+.my-action-button:active,
+.my-action-button:focus {
+  outline: none;
+}
+
+.my-action-button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  margin-bottom: 0.875rem;
+  border: 1px solid #e2e5ed;
+  border-radius: 54px;
+  color: #1665d8;
+  -o-object-fit: none;
+  object-fit: none;
+}
+
+.my-app__body {
+  padding-top: 1.875rem;
+  padding-bottom: 1.875rem;
+}
+
+/* My card */
+.my-card:not(:last-child) {
+  margin-bottom: 1.875rem;
+}
+
+.my-card__header {
+  display: flex;
+  padding: 1.5rem 1.875rem;
+  border-width: 0 0 1px;
+  /* border-bottom: 1px solid #eaedf3; */
+  border-color: rgba(0, 0, 0, 0.125);
+  background: none;
+}
+
+.my-card__header-title {
+  flex: 1;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.my-card__header-link {
+  color: #9ea0a5;
+  /* 14px is default font size */
+}
+
+.my-card__header-link:hover,
+.my-card__header-link:focus {
+  color: #9ea0a5;
+}
+
+.my-card__body {
+  padding: 1.5rem 1.875rem;
+}
+
+/* My list */
+.my-list-item {
+  display: flex;
+  padding: 1rem 1.875rem;
+}
+
+.my-list-item__date,
+.my-list-item__text,
+.my-list-item__fee {
+  display: flex;
+  flex-direction: column;
+}
+
+.my-list-item__date {
+  flex-direction: column-reverse;
+  margin-right: 25px;
+  color: #9ea0a5;
+}
+
+.my-list-item__date-day {
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.my-list-item__date-month {
+  margin-bottom: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  text-transform: uppercase;
+}
+
+.my-list-item__text {
+  flex: 1;
+}
+
+.my-list-item__text-title {
+  margin: 0 0 7px;
+  /* 14px is default font size */
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.my-list-item__text-description {
+  margin: 0;
+  color: #9ea0a5;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.my-list-item__fee {
+  text-align: right;
+}
+
+.my-list-item__fee-delta {
+  color: #3bad4b;
+  /* 14px is default font size */
+  font-weight: 500;
+}
+
+.my-list-item__fee-currency {
+  color: #9ea0a5;
+  font-size: 12px;
+}
+
+/* My inline-list */
+.my-list-inline li:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
+/* My dl (definition list */
+@media (min-width: 992px) {
+  .my-dl dt {
+    float: left;
+    color: #9ea0a5;
+    font-weight: 400;
+  }
+
+  .my-dl dd {
+    text-align: right;
+  }
+}
+/* My typography */
+.my-text-headline {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.my-text-overline {
+  margin-bottom: 0.75rem;
+  color: #9ea0a5;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+/* Divider */
+.my-divider {
+  margin: 1.25rem 0;
+}
+
+/* Input */
+.my-input {
+  max-width: 186px;
+}
+
+.my-select {
+  border-color: #d8dce6;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  font-size: 14px;
+}
+
+/* Bootstrap custom fixes */
+@media (max-width: 1199px) {
+  .container {
+    max-width: 100%;
+  }
+}
+.my-alert {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1.875rem;
+  padding-top: 0.937rem;
+  padding-bottom: 0.937rem;
+  border: none;
+  box-shadow: none;
+}
+
+.my-alert.alert-info {
+  background-color: #1665d8;
+  color: #fff;
+}
+
+.my-alert__icon {
+  margin-right: 1.25rem;
+}
+
+/* List icon */
+.list__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 40px;
+  border: 1px solid #e2e5ed;
+  border-radius: 0.25rem;
+}
+.lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+#lightbox2 .lightbox-content {
+  width: 30%;
+}
+#openLightbox2 {
+  margin-top: 0;
+}
+.lightbox-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px;
+  width: 90%;
+  position: relative;
+}
+
+.lightbox-content h3 {
+  margin-top: 0;
+}
+
+.lightbox-content .checkout-bill-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.lightbox-content .checkout-input,
+.lightbox-content .checkout-select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.lightbox-content .checkout-select {
+  height: 45px;
+}
+
+.close-lightbox {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+}
+.button {
+  background-color: white;
+  border: 1px solid black;
+  padding: 5px;
+}
+.button:hover {
+  background-color: black;
+  color: white;
+}
+.submit {
+  height: 35px;
+}
+.address {
+  margin-top: 10px;
+}
+.home {
+  margin: 30px 0px 0px 40px;
+  font-size: 18px;
+  color: black;
+}
+.home a:active {
+  color: black;
+}
+.home a {
+  color: black;
+}
+
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-right: 1.5vw;
+}
+
+.profile-pic-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.profile-pic {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.profile-pic-container::before {
+  content: "+";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #007bff;
+  color: #fff;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* Phone View */
+
+@media (max-width: 800px) {
+  .home {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 3vw;
+  }
+  .my-app__header {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  .my-app__header h1 {
+    font-size: 4vw;
+    line-height: 20px;
+    margin-bottom: 1vw;
+  }
+  .titleBody {
+    width: 50%;
+    margin-left: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .my-app__header p {
+    font-size: 2vw;
+  }
+
+  .my-app__header img {
+    width: 7vw;
+    height: 7vw;
+    margin-bottom: 5px;
+  }
+  .my-app__header button {
+    font-size: 2vw;
+  }
+  .my-app__body .row {
+    display: flex;
+    flex-direction: column;
+  }
+  #userName {
+    font-size: 3vw;
+    display: flex;
+    flex-direction: column;
+  }
+  .col-4,
+  .col-8 {
+    width: 100%;
+    max-width: 100%;
+  }
+  .col-8 .alert {
+    margin: 5% 0% 0% 0%;
+  }
+  #lightbox2 .lightbox-content {
+    width: 70%;
+  }
+  .lightbox-content {
+    font-size: 2.5vw;
+  }
+  .profile-container {
+    margin-top: 0;
+  }
+}
