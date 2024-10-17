@@ -59,7 +59,7 @@ const Cart = (props) => {
 
   useEffect(() => {
     const fetchCartDetails = async () => {
-      if (!userName) {
+      if (userName==null) {
         window.location.href = "https://karnaliorganics.com/login/login.html";
       }
       try {

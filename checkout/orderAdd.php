@@ -2,13 +2,16 @@
 header('Content-Type: application/json');
 
 // Fetch username from fetchUser.php
-$fetchUserUrl = "../php/fetchUser.php?sessionId=" . urlencode($sessionId);
+$sessionId = $_COOKIE['user_login'];
+$fetchUserUrl = "https://karnaliorganics.com/php/fetchUser.php?sessionId=" . $sessionId;
 $userData = file_get_contents($fetchUserUrl);
 $userDataJson = json_decode($userData, true);
+
 
 if (isset($userDataJson['username'])) {
     $username = $userDataJson['username'];
     $cartID = $username . '_cart';
+    
 } else {
     echo json_encode(["error" => "Failed to fetch username"]);
     exit();
@@ -29,11 +32,14 @@ if ($conn->connect_error) {
     exit();
 }
 
+echo $username;
 // Retrieve address details for the user
 $addressStmt = $conn->prepare("SELECT * FROM address_details WHERE username = ?");
 $addressStmt->bind_param("s", $username);
+echo $addressStmt;
 $addressStmt->execute();
 $addressResult = $addressStmt->get_result();
+echo $addressResult;
 
 if ($addressResult->num_rows === 0) {
     echo json_encode(["error" => "No address details found for user"]);
@@ -41,6 +47,7 @@ if ($addressResult->num_rows === 0) {
 }
 
 $addressData = $addressResult->fetch_assoc();
+echo $addressData;
 $addressStmt->close();
 
 // Extract input data
@@ -97,6 +104,7 @@ if ($stmt->execute()) {
    $context  = stream_context_create($options);
    $result = file_get_contents($updateStockUrl, false, $context);
    $response = json_decode($result, true);
+   
 
    if (isset($response['error'])) {
        echo json_encode(["error" => $response['error']]);

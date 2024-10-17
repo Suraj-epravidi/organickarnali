@@ -361,17 +361,18 @@ if (!isset($_COOKIE[$cookieName])) {
       return response.json();
     })
     .then(data => {
-      if (data.success) {
-        displayCartItems(data.items);
+      if (!data.success) {
+        displayCartItems(data);
       } else {
+        console.log(data);
         // Display error message from the server
-        document.getElementById("errorMessage").textContent = data.error || 'An error occurred while fetching cart items.';
+        document.getElementById("errorMessage").textContent = data.error || 'An error occurred while fetching cart items 1.';
         document.getElementById("errorMessage").style.display = "block";
       }
     })
     .catch(error => {
       console.error("Error fetching cart items:", error);
-      document.getElementById("errorMessage").textContent = 'An error occurred while fetching cart items.';
+      document.getElementById("errorMessage").textContent = 'An error occurred while fetching cart items 2.';
       document.getElementById("errorMessage").style.display = "block";
     });
 }

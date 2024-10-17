@@ -22,7 +22,7 @@ $status = 'Pending';
 $sessionId = $_COOKIE['user_login'];
 
 // Fetch username from fetchUser.php
-$fetchUserUrl = "../php/fetchUser.php?sessionId=" . urlencode($sessionId);
+$fetchUserUrl = "https://karnaliorganics.com/php/fetchUser.php?sessionId=" . $sessionId;
 $userData = file_get_contents($fetchUserUrl);
 $userDataJson = json_decode($userData, true);
 
