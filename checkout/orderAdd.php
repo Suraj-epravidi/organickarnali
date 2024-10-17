@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-
+// error_log("In Addorder.php",0);
 // Fetch username from fetchUser.php
 $sessionId = $_COOKIE['user_login'];
 $fetchUserUrl = "https://karnaliorganics.com/php/fetchUser.php?sessionId=" . $sessionId;
@@ -14,6 +14,8 @@ if (isset($userDataJson['username'])) {
     echo json_encode(["error" => "Failed to fetch username"]);
     exit();
 }
+
+// error_log("Taken username $username",0);
 
 // Database connection details
 $servername = "localhost";
@@ -77,7 +79,9 @@ if (empty($addresses)) {
 
 // Use the first address as $addressData
 $addressData = $addresses[0];
-
+// error_log("$addressData['country'], $addressData['address1'], $addressData['address2'],
+//     $addressData['suburb'], $addressData['state'], $addressData['postcode'],
+//     $addressData['phone'], $addressData['altPhone']",0);
 // Extract input data
 $orderNotes = isset($_POST['orderNotes']) ? $_POST['orderNotes'] : '';
 $paymentMethod = isset($_POST['paymentMethod']) ? $_POST['paymentMethod'] : '';
@@ -88,7 +92,7 @@ $newCartID = $newTableSuffix . '_kar';
 $status = 'Pending';
 
 // Prepare and execute insert statement for orders
-$stmt = $conn->prepare("INSERT INTO orders (first_name, last_name, country, address1, address2, suburb, state, postcode, phone, alt_phone, order_notes, payment_method, status, cartID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)");
+$stmt = $conn->prepare("INSERT INTO orders (first_name, country, address1, address2, suburb, state, postcode, phone, alt_phone, order_notes, payment_method, status, cartID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)");
 
 if ($stmt === false) {
     echo json_encode(["error" => "Failed to prepare statement for inserting data: " . $conn->error]);
@@ -96,8 +100,8 @@ if ($stmt === false) {
 }
 
 $stmt->bind_param(
-    "ssssssssssssss",
-    "Suraj","Thapa",$addressData['country'], $addressData['address1'], $addressData['address2'],
+    "sssssssssssss",
+    $username,$addressData['country'], $addressData['address1'], $addressData['address2'],
     $addressData['suburb'], $addressData['state'], $addressData['postcode'],
     $addressData['phone'], $addressData['altPhone'], $orderNotes,
     $paymentMethod, $status, $cartID
