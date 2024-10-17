@@ -28,7 +28,7 @@ export default function NavTop(props) {
             <img src={basketImg} alt="Basket Icon" />
           </Link>
 
-          <a href="../profile/profile.php">
+          <a href="https://karnaliorganics.com/profile/profile.php">
             <img src={userImg} alt="User Icon" />
           </a>
         </div>

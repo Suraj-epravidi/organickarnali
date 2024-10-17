@@ -299,6 +299,7 @@ body {
   left: 50%;
   position: relative;
   transform: translate(-50%);
+  object-fit: cover;
 }
 
 .items h5 {
@@ -1130,8 +1131,8 @@ footer h3 {
     left: 1.5%;
   }
   .items {
-    width: 83vw;
-    height: 90%;
+    width: 80vw;
+    height: 100vw;
     margin-bottom: 35%;
   }
   .bgcolor {
@@ -1140,7 +1141,7 @@ footer h3 {
     height: 28vh;
     position: absolute;
     top: 50%;
-    right: -9.5%;
+    right: -9.5%; 
     z-index: -1;
   }
   .items p {
@@ -1152,10 +1153,11 @@ footer h3 {
     margin-bottom: 8px;
   }
   .items img {
-    height: 50vh;
+    height: 40vh;
+    object-fit: cover;
   }
   .items button {
-    height: 11vw;
+    height: 15vw;
     font-size: 3vw;
   }
   .testimony {

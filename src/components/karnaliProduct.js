@@ -86,9 +86,7 @@ export default function Product(props) {
                 animationDuration="1s" // Example duration
                 exemptFromBubble={true} // Change to true if this component should be exempt from bubble animation
                 exemptFromReset={true} // Change to true if this component should be exempt
-              >
-                <div className="bgcolor"></div>
-              </AnimatedComponent>
+              ></AnimatedComponent>
             ))}
         </ProductRows>
       );

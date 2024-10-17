@@ -55,7 +55,10 @@ export default function PhoneNav(props) {
                   <Link to="/cart">Cart</Link>
                 </li>
                 <li>
-                  <Link to="/profile">Profile</Link>
+                  <a href="https://karnaliorganics.com/profile/profile.php">
+                    {" "}
+                    Profile
+                  </a>
                 </li>
               </ul>
             </nav>
