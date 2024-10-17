@@ -7,11 +7,9 @@ $fetchUserUrl = "https://karnaliorganics.com/php/fetchUser.php?sessionId=" . $se
 $userData = file_get_contents($fetchUserUrl);
 $userDataJson = json_decode($userData, true);
 
-
 if (isset($userDataJson['username'])) {
     $username = $userDataJson['username'];
     $cartID = $username . '_cart';
-    
 } else {
     echo json_encode(["error" => "Failed to fetch username"]);
     exit();
@@ -28,96 +26,116 @@ $conn = new mysqli($servername, $usernameDB, $passwordDB, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
-    echo json_encode(["error" => "Connection failed"]);
+    echo json_encode(["error" => "Connection failed: " . $conn->connect_error]);
     exit();
 }
 
-echo $username;
-// Retrieve address details for the user
-$addressStmt = $conn->prepare("SELECT * FROM address_details WHERE username = ?");
-$addressStmt->bind_param("s", $username);
-echo $addressStmt;
-$addressStmt->execute();
-$addressResult = $addressStmt->get_result();
-echo $addressResult;
+// Prepare the SQL statement to fetch address details for the user
+$addressStmt = $conn->prepare("SELECT country, address1, address2, suburb, state, postcode, phone, altPhone FROM address_details WHERE username = ?");
+if ($addressStmt === false) {
+    echo json_encode(["error" => "Error preparing the SQL statement: " . $conn->error]);
+    exit();
+}
 
-if ($addressResult->num_rows === 0) {
+// Bind parameters to the prepared statement
+if (!$addressStmt->bind_param("s", $username)) {
+    echo json_encode(["error" => "Error binding parameters: " . $addressStmt->error]);
+    exit();
+}
+
+// Execute the prepared statement
+if (!$addressStmt->execute()) {
+    echo json_encode(["error" => "Error executing the statement: " . $addressStmt->error]);
+    exit();
+}
+
+// Bind the result variables to the selected columns
+$addressStmt->bind_result($country, $address1, $address2, $suburb, $state, $postcode, $phone, $altPhone);
+
+// Fetch the data into an array
+$addresses = [];
+while ($addressStmt->fetch()) {
+    $addresses[] = [
+        'country' => $country,
+        'address1' => $address1,
+        'address2' => $address2,
+        'suburb' => $suburb,
+        'state' => $state,
+        'postcode' => $postcode,
+        'phone' => $phone,
+        'altPhone' => $altPhone
+    ];
+}
+
+$addressStmt->close();
+
+// Check if any address details were found
+if (empty($addresses)) {
     echo json_encode(["error" => "No address details found for user"]);
     exit();
 }
 
-$addressData = $addressResult->fetch_assoc();
-echo $addressData;
-$addressStmt->close();
+// Use the first address as $addressData
+$addressData = $addresses[0];
 
 // Extract input data
-$firstName = $addressData['first_name'];
-$lastName = $addressData['last_name'];
-$country = $addressData['country'];
-$address1 = $addressData['address1'];
-$address2 = $addressData['address2'];
-$suburb = $addressData['suburb'];
-$state = $addressData['state'];
-$postcode = $addressData['postcode'];
-$phone = $addressData['phone'];
-$altPhone = $addressData['alt_phone'];
-$orderNotes = isset($input['orderNotes']) ? $input['orderNotes'] : '';
-$paymentMethod = isset($input['paymentMethod']) ? $input['paymentMethod'] : '';
+$orderNotes = isset($_POST['orderNotes']) ? $_POST['orderNotes'] : '';
+$paymentMethod = isset($_POST['paymentMethod']) ? $_POST['paymentMethod'] : '';
 
-// Generate cartID
-$cartID = $username . '_cart';
+// Generate cartID and new table name
 $newTableSuffix = sprintf('%04d', rand(0, 9999));
 $newCartID = $newTableSuffix . '_kar';
-// Set default status (e.g., 'P' for Pending)
 $status = 'Pending';
 
-// Prepare and execute insert statement
-$stmt = $conn->prepare("INSERT INTO orders (first_name, last_name, country, address1, address2, suburb, state, postcode, phone, alt_phone, order_notes, payment_method, status, cartID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+// Prepare and execute insert statement for orders
+$stmt = $conn->prepare("INSERT INTO orders (first_name, last_name, country, address1, address2, suburb, state, postcode, phone, alt_phone, order_notes, payment_method, status, cartID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)");
 
 if ($stmt === false) {
-    echo json_encode(["error" => "Failed to prepare statement for inserting data"]);
+    echo json_encode(["error" => "Failed to prepare statement for inserting data: " . $conn->error]);
     exit();
 }
 
-$stmt->bind_param("ssssssssssssss", $firstName, $lastName, $country, $address1, $address2, $suburb, $state, $postcode, $phone, $altPhone, $orderNotes, $paymentMethod, $status, $cartID);
+$stmt->bind_param(
+    "ssssssssssssss",
+    "Suraj","Thapa",$addressData['country'], $addressData['address1'], $addressData['address2'],
+    $addressData['suburb'], $addressData['state'], $addressData['postcode'],
+    $addressData['phone'], $addressData['altPhone'], $orderNotes,
+    $paymentMethod, $status, $cartID
+);
 
 if ($stmt->execute()) {
-    // Rename the table
-    $renameTableQuery = "RENAME TABLE $cartID TO $newCartID"; // Adjust as needed
+    // Rename the cart table
+    $renameTableQuery = "RENAME TABLE `$cartID` TO `$newCartID`";
     if ($conn->query($renameTableQuery) === false) {
-        echo json_encode(["error" => "Failed to rename the table"]);
+        echo json_encode(["error" => "Failed to rename the table: " . $conn->error]);
         exit();
     }
 
-   // Call updateStock.php to update stock
-   $updateStockUrl = "./updateStock.php";
-   $updateStockData = json_encode(['cartName' => $newCartID]);
+    // Call updateStock.php to update stock
+    $updateStockUrl = "./updateStock.php";
+    $updateStockData = json_encode(['cartName' => $newCartID]);
 
-   $options = [
-       'http' => [
-           'header'  => "Content-type: application/json\r\n",
-           'method'  => 'POST',
-           'content' => $updateStockData,
-       ],
-   ];
+    $options = [
+        'http' => [
+            'header'  => "Content-type: application/json\r\n",
+            'method'  => 'POST',
+            'content' => $updateStockData,
+        ],
+    ];
 
-   $context  = stream_context_create($options);
-   $result = file_get_contents($updateStockUrl, false, $context);
-   $response = json_decode($result, true);
-   
+    $context = stream_context_create($options);
+    $result = file_get_contents($updateStockUrl, false, $context);
+    $response = json_decode($result, true);
 
-   if (isset($response['error'])) {
-       echo json_encode(["error" => $response['error']]);
-       exit();
-   }
+    if (isset($response['error'])) {
+        echo json_encode(["error" => $response['error']]);
+        exit();
+    }
 
-    $response = [];
     // Always include a redirect URL in the response
-    $response['redirect'] = 'https://karnaliorganics.com/';
-
-    echo json_encode($response);
+    echo json_encode(["redirect" => 'https://karnaliorganics.com/']);
 } else {
-    echo json_encode(["error" => "Failed to execute insert statement"]);
+    echo json_encode(["error" => "Failed to execute insert statement: " . $stmt->error]);
 }
 
 $stmt->close();

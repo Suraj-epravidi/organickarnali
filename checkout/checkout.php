@@ -294,10 +294,11 @@ if (!isset($_COOKIE[$cookieName])) {
       const defaultAddress = document.getElementById("defaultAddress").checked;
       let data;
 
-      if (defaultAddress) {
+      if (defaultAddress===true) {
         data = {
           orderNotes: document.getElementById("orderNotes").value,
           paymentMethod: paymentMethodChecked.value,
+   
         };
 
         fetch("orderAdd.php", {
