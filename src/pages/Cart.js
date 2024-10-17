@@ -59,8 +59,11 @@ const Cart = (props) => {
 
   useEffect(() => {
     const fetchCartDetails = async () => {
-      if (userName==null) {
-        window.location.href = "https://karnaliorganics.com/login/login.html";
+      console.log(cookieValue);
+      if (!cookieValue) {
+        alert("Please log in first!");
+        window.location.href="https://karnaliorganics.com/login/login.html";
+        
       }
       try {
         const response = await fetch(
