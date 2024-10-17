@@ -1109,7 +1109,7 @@ footer h3 {
     display: none;
   }
   .product {
-    padding: 10% 8% 1% 8%;
+    padding: 10% 8% 1% 10.5%;
   }
   .product .head {
     width: 100%;
@@ -1141,7 +1141,7 @@ footer h3 {
     height: 28vh;
     position: absolute;
     top: 50%;
-    right: -9.5%; 
+    right: -9.5%;
     z-index: -1;
   }
   .items p {
