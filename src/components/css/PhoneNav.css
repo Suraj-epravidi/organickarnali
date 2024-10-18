@@ -1,53 +1,74 @@
 .lightbox {
   position: fixed;
   top: 0;
-  left: 0;
-  width: 100%;
+  right: 0;
+  width: 75%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.9);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-end;
-  gap: 5%;
   z-index: 1000;
-  animation: fadeIn 0.3s ease-out; /* Fade-in animation */
+  animation: slideInRight 0.3s ease-out; /* Changed animation */
+}
+
+/* Add new keyframes for sliding in from the right */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%); /* Start off-screen to the right */
+  }
+  to {
+    transform: translateX(0); /* Slide to the original position */
+  }
 }
 
 .lightbox-content {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  width: 100%; /* Full width for the content */
   position: relative;
-  width: 25%;
-  max-width: 500px;
-  position: relative;
-  top: 10%;
-  right: 2%;
-  animation: slideIn 0.3s ease-out; /* Slide-in animation */
-}
-
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  border: none;
-  background: red;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
+  height: 100%; /* Full height for the content */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Spread out the items to fill the space */
 }
 
 nav ul {
   list-style: none;
   padding: 0;
+  margin: 0;
+  height: 100%; /* Make sure the list takes full height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; /* Distribute space evenly between items */
+  width: 100%; /* Ensure the list takes up the full width */
 }
 
 nav ul li {
-  margin: 10px 0;
+  margin: 0; /* No margins between list items */
+}
+
+nav ul li:first-child {
+  margin-top: 100px; /* Push the first item down by about the height of one rectangle */
 }
 
 nav ul li a {
   text-decoration: none;
-  color: black;
-  font-size: 18px;
+  color: white;
+  font-size: 26px; /* Increase font size */
+  background: none; /* Remove background color by default */
+  padding: 25px 0; /* Increased padding to make the rectangles taller */
+  text-align: center; /* Center-align the text */
+  width: 100%; /* Make the rectangles extend the full width */
+  display: block;
+  transition: linear 0.3s ; /* Smooth hover effect */
+}
+
+nav ul li a:hover {
+  background: rgba(255, 255, 255, 0.1); /* Light up the rectangle on hover */
+}
+
+.close-btn {
+  display: none; /* No close button */
 }
